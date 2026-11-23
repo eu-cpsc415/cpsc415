@@ -8,9 +8,6 @@ export default defineConfig({
   site: process.env.SITE_URL ?? 'https://eu-cpsc415.github.io',
   base: process.env.BASE_PATH ?? '/cpsc415',
   trailingSlash: 'always',
-  // Works around a dev-server error ("Unknown file extension .css") from the
-  // font imports in @eu-cpsc/lecture-slides 0.2.0.
-  vite: { ssr: { noExternal: [/^@fontsource-variable\//] } },
   integrations: [
     lectureSlides({
       course: {
