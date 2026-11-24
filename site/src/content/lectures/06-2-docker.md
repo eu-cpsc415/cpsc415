@@ -1,7 +1,7 @@
 ---
 title: Docker
 number: 6.2
-draft: true                      # shown in `npm run dev`, hidden in the built site until false
+draft: true # shown in `npm run dev`, hidden in the built site until false
 ---
 
 ::slide{.title}
@@ -40,13 +40,14 @@ The hypervisor provides illusions to guest operating systems in much the same wa
 
 - The guest operating systems behave just like they would if used without a hypervisor.
 - Each guest has its own kernel, process scheduling, virtual memory management, etc.
-:::
+  :::
 
 ---
 
 ## Virtual Machine Uses
 
 :::steps
+
 - **Experimentation**: try out another OS without removing your current one
 - **Compatibility**: run apps that only work on certain OSes
 - **Isolation**: sandbox apps to specific virtual environments
@@ -54,7 +55,7 @@ The hypervisor provides illusions to guest operating systems in much the same wa
 - **Development/Testing**: ensure correct environment for dev/QA
 - **Snapshots**: save VM state, experiment, rollback to saved state
 - Many more...
-:::
+  :::
 
 :::bottom{.step}
 Drawbacks? Do you need the entire OS?
@@ -175,8 +176,9 @@ More likely: your code is using some slice of CPU, memory, and storage from a ma
 Treat your infrastructure like cattle, not pets.
 
 :::fill
+
 > In the old way of doing things, we treat our servers like pets, for example Bob the mail server. If Bob goes down, it’s all hands on deck. The CEO can’t get his email and it’s the end of the world. In the new way, servers are numbered, like cattle in a herd. For example, www001 to www100. When one server goes down, it’s taken out back, shot, and replaced on the line.
-:::
+> :::
 
 :::bottom{.small}
 [The History of Pets vs Cattle and How to Use the Analogy Properly](https://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/)
@@ -190,7 +192,7 @@ Treat your infrastructure like cattle, not pets.
 
 ## Automation
 
-- [Puppet](https://en.wikipedia.org/wiki/Puppet_(software)) - software configuration management tool (not just for VMs)
+- [Puppet](<https://en.wikipedia.org/wiki/Puppet_(software)>) - software configuration management tool (not just for VMs)
 - [Vagrant](https://developer.hashicorp.com/vagrant) - more for development environments than servers
 
 :::notes
@@ -337,3 +339,62 @@ docker run -it --rm fedora:44 bash
 - Containers are intended to be created, destroyed, recreated, etc.
 - Changes inside a container are lost.
 - For persistence: use volumes or bind mounts
+
+---
+
+## Example: Bind Mount
+
+Run without mounting a volume:
+
+```
+docker run -d -p 8080:80 nginx:alpine
+```
+
+Run with container's `html` folder mounted to host file system:
+
+```
+docker run -d -p 8080:80 -v "$(pwd)/mysite":/usr/share/nginx/html nginx:alpine
+```
+
+- `-v "$(pwd)/mysite":/usr/share/nginx/html`
+- Host directory is on left of `:`
+- Container directory is on right
+- `$(pwd)` gets the current working directory of your shell
+
+---
+
+## Example: Volume
+
+Run with container's `html` folder mounted to a named volume:
+
+```
+docker run -d -p 8080:80 -v myvol:/usr/share/nginx/html nginx:alpine
+```
+
+List volumes:
+
+```
+docker volume ls
+```
+
+---
+
+## Example: Custom Image
+
+https://github.com/eu-cpsc415/devcontainer-qemu-riscv
+
+---
+
+## Docker Compose
+
+- Define a collection of containers to run together (e.g., web app + database)
+- Containers defined in `docker-compose.yaml`
+- Run `docker compose up -d` to start the stack
+  - Run in same directory as `docker-compose.yaml`
+- Run `docker compose down` to stop the stack
+
+---
+
+## Exercise
+
+See instructions in lecture repo.
