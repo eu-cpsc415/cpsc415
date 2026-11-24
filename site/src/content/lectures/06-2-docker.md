@@ -237,7 +237,7 @@ Images:
 
 ---
 
-## Container
+## Run
 
 To use Docker:
 
@@ -252,5 +252,88 @@ docker run hello-world
 ```
 
 :::bottom{.small}
-In the lecture Codespace, you'll have to prefix the Docker commands with `sudo`.
+Note: you may have to prefix certain Docker commands with `sudo` in the lecture Codespace.
 :::
+
+---
+
+## List Containers
+
+To list running containers:
+
+```
+docker ps
+```
+
+To list all containers:
+
+```
+docker ps -a
+```
+
+To delete a container:
+
+```
+docker rm <container_name_or_id>
+```
+
+---
+
+## Example: Web Application
+
+Simple web application test image: [crccheck/hello-world](https://hub.docker.com/r/crccheck/hello-world)
+
+```
+docker run -d --name web-test -p 8888:8000 crccheck/hello-world
+```
+
+- `docker run`: creates a new container
+- `-d`: runs in detached mode; lets the container run in the background
+- `--name`: assign a custom name to the container instead of a randomly generated one
+- `-p 8888:8000`: maps the port 8888 on the host machine to go to port 8000 inside the container
+- `crccheck/hello-world`: the image to use for this container
+
+:::notes
+If running this in a Codespace, you'll need to forward port 8888 in order to view the application in your browser. Use the **Ports** tab in your Codespace instance to do this.
+:::
+
+---
+
+## Example: (cont)
+
+Stop a running container:
+
+```
+docker stop <name_or_id>
+```
+
+Restart a stopped container:
+
+```
+docker start <name_or_id>
+```
+
+---
+
+## Example: Fedora
+
+Many base images exist for different OS distributions.
+
+Here is an example for Fedora:
+
+```
+docker run -it --rm fedora:44 bash
+```
+
+- `-it`: run in interactive mode; keep stdin open and fed into the container from host
+- `--rm`: delete the container automatically after it exits
+- `fedora:44`: run the `fedora` image using the version tagged `44`
+- `bash`: run the bash command inside the container after it starts; this will launch a shell for us to use inside the container
+
+---
+
+## Persistence
+
+- Containers are intended to be created, destroyed, recreated, etc.
+- Changes inside a container are lost.
+- For persistence: use volumes or bind mounts
