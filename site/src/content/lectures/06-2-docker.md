@@ -1,7 +1,7 @@
 ---
 title: Docker
 number: 6.2
-draft: true # shown in `npm run dev`, hidden in the built site until false
+date: 2026-11-30
 ---
 
 ::slide{.title}
@@ -12,7 +12,7 @@ draft: true # shown in `npm run dev`, hidden in the built site until false
 
 ::slide{.section}
 
-# Motivation
+# Review
 
 ---
 

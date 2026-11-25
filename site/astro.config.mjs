@@ -12,10 +12,9 @@ export default defineConfig({
     lectureSlides({
       course: {
         code: 'CPSC 415',
-        title: 'Course Title',
-        term: 'Term YYYY',
-        instructor: 'Instructor Name',
-        blurb: 'Lecture slides and notes. Open any lecture to read it, or press P to present.',
+        title: 'Operating Systems',
+        term: 'FA-26',
+        blurb: 'Lecture slides and notes.',
         links: [],
       },
       brand: 'evangel',
